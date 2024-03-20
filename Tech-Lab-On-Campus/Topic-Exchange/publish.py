@@ -19,14 +19,18 @@ from solution.producer_sol import mqProducer  # pylint: disable=import-error
 
 
 def main(ticker: str, price: float, sector: str) -> None:
-    
+
     # Implement Logic to Create Routing Key from the ticker and sector variable -  Step 2
     #
     #                       WRITE CODE HERE!!!
     #
+    # Set the routing key and publish a message with that topic exchange:
+    routing_key = f'stock.{ticker}.{sector}' if len(sys.argv) == 3 else 'anonymous.info'
+    message = f'{ticker} price is now ${price}' if len(sys.argv) == 3 else'Hello World!'
 
 
-    producer = mqProducer(routing_key=routingKey,exchange_name="Tech Lab Topic Exchange")
+
+    producer = mqProducer(routing_key=routing_key,exchange_name="Tech Lab Topic Exchange")
 
 
     # Implement Logic To Create a message variable from the variable EG. "TSLA price is now $500" - Step 3
@@ -39,9 +43,12 @@ def main(ticker: str, price: float, sector: str) -> None:
 
 if __name__ == "__main__":
 
+
     # Implement Logic to read the ticker, price and sector string from the command line and save them - Step 1
     #
     #                       WRITE CODE HERE!!!
     #
-
+    ticker = sys.argv[1]
+    price = sys.argv[2]
+    sector = sys.argv[3]
     sys.exit(main(ticker,price,sector))
