@@ -53,20 +53,20 @@ class mqConsumerInterface:
         channel.basic_ack(method_frame.delivery_tag, False)
         #Print message (The message is contained in the body parameter variable)
         print(body)
-        pass
+        
 
     def startConsuming(self) -> None:
         # Print " [*] Waiting for messages. To exit press CTRL+C"
         print(" [*] Waiting for messages. To exit press CTRL+C")
         # Start consuming messages
         self.channel.start_consuming()
-        pass
+        
     
     def __del__(self) -> None:
         # Print "Closing RMQ connection on destruction"
-        
+        print("Closing RMQ connection on destruction")
         # Close Channel
-
+        self.channel.close()
         # Close Connection
+        self.connection.close()
         
-        pass
