@@ -17,7 +17,9 @@
 import os
 import sys
 
-from solution.consumer_sol import mqConsumer  # pylint: disable=import-error
+# from solution.consumer_sol import mqConsumer  # pylint: disable=import-error
+
+from consumer_interface import mqConsumerInterface
 
 
 def main() -> None:
