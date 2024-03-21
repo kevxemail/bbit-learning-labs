@@ -14,9 +14,12 @@ class mqProducer(mqProducerInterface):
     def setupRMQConnection(self) -> None:
         # Set-up Connection to RabbitMQ service
         con_params = pika.URLParameters(os.environ["AMQP_URL"])
+        
         self.connection = pika.BlockingConnection(parameters=con_params)
+        self.connection
         # Establish Channel
         self.channel = self.connection.channel()
+
         # Create the exchange if not already present
         self.exchange = self.channel.exchange_declare(
         exchange=self.exchange_name, exchange_type="topic"
@@ -29,6 +32,7 @@ class mqProducer(mqProducerInterface):
         routing_key=self.routing_key,
         body=message,
         )
+        
         # Close Channel
         self.channel.close()
 
